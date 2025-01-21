@@ -58,7 +58,7 @@ then
       --miner.etherbase="0x123463a4b065722e99115d6c222f267d9cabb524" \
       --miner.threads=1 \
       --http.addr=0.0.0.0 \
-      --ws.api "eth,net,web3,network,debug,txpool" --ws --ws.addr 0.0.0.0 --ws.origins "*" --http.addr 0.0.0.0 --http.vhosts pr-rpc.canxium.net --http.api debug,net,eth,shh,web3,txpool --http.corsdomain "*"
+      --ws.api "eth,net,web3,network,debug,txpool" --ws --ws.addr 0.0.0.0 --ws.origins "*" --http.addr 0.0.0.0 --http.vhosts testnet-rpc.canxium.net --http.api debug,net,eth,shh,web3,txpool --http.corsdomain "*"
 
 else
   exec $GETH_BINARY \
