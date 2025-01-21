@@ -17,14 +17,14 @@
     "ethash": {
       "minimumDifficulty": 1000000
     },
-    "miningContract": "0x5FD4e99DC1eFC12eBE5c5530d6C7b3860C819f9D",
-    "shanghaiTime": 1737081624,
+    "miningContract": "0x22FF40D2d2aF25C5c277D4494C14fC5f49b61D51",
+    "shanghaiTime": 1737208123,
     "terminalTotalDifficulty": 8000000,
     "terminalTotalDifficultyPassed": false,
     "mergeMining": {
       "minimumKaspaDifficulty": 100000
     },
-    "heliumTime": 1737081720
+    "heliumTime": 1737208219
   },
   "alloc": {
     "0x4242424242424242424242424242424242424242": {

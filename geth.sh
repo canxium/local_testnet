@@ -40,7 +40,7 @@ $GETH_BINARY init \
 
 echo "Completed init"
 
-if [ $http_port -eq "6002" ]
+if [ $http_port -eq "6001" ]
 then
   exec $GETH_BINARY \
       --datadir $data_dir \
@@ -49,6 +49,7 @@ then
       --http.api="engine,eth,web3,net,debug" \
       --networkid=$CHAIN_ID \
       --syncmode=full \
+      --gcmode archive \
       --bootnodes $EL_BOOTNODE_ENODE \
       --port $network_port \
       --http.port $http_port \
@@ -56,7 +57,8 @@ then
       --mine \
       --miner.etherbase="0x123463a4b065722e99115d6c222f267d9cabb524" \
       --miner.threads=1 \
-      --http.addr=0.0.0.0
+      --http.addr=0.0.0.0 \
+      --ws.api "eth,net,web3,network,debug,txpool" --ws --ws.addr 0.0.0.0 --ws.origins "*" --http.addr 0.0.0.0 --http.vhosts pr-rpc.canxium.net --http.api debug,net,eth,shh,web3,txpool --http.corsdomain "*"
 
 else
   exec $GETH_BINARY \
