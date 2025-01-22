@@ -40,6 +40,8 @@ $GETH_BINARY init \
 
 echo "Completed init"
 
+echo "Bootnode: $EL_BOOTNODE_ENODE"
+
 if [ $http_port -eq "6001" ]
 then
   exec $GETH_BINARY \

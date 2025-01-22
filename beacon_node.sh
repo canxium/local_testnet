@@ -56,7 +56,7 @@ exec $lighthouse_binary \
 	--enable-private-discovery \
   --disable-peer-scoring \
 	--staking \
-	--enr-address 127.0.0.1 \
+	--enr-address $NODE_IP_ADDRESS \
 	--enr-udp-port $tcp_port \
 	--enr-tcp-port $tcp_port \
 	--enr-quic-port $quic_port \
