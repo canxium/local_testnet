@@ -13,7 +13,7 @@ echo "Generating bootnode enr"
 
 lcli \
 	generate-bootnode-enr \
-	--ip 0.0.0.0 \
+	--ip $NODE_IP_ADDRESS \
 	--udp-port $BOOTNODE_PORT \
 	--tcp-port $BOOTNODE_PORT \
 	--genesis-fork-version $GENESIS_FORK_VERSION \
@@ -31,6 +31,6 @@ echo "Starting bootnode"
 exec lighthouse boot_node \
     --testnet-dir $TESTNET_DIR \
     --port $BOOTNODE_PORT \
-    --listen-address 0.0.0.0 \
+    --listen-address $NODE_IP_ADDRESS \
 	--disable-packet-filter \
     --network-dir $DATADIR/bootnode \
