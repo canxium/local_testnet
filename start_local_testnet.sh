@@ -124,16 +124,16 @@ EL_base_auth_http=5000
 
 (( $VC_COUNT < $BN_COUNT )) && SAS=-s || SAS=
 
-for (( el=1; el<=$BN_COUNT; el++ )); do
+for (( el=0; el<=2; el++ )); do
     execute_command_add_PID geth_$el.pid geth_$el.log ./geth.sh $DATADIR/geth_datadir$el $((EL_base_network + $el)) $((EL_base_http + $el)) $((EL_base_auth_http + $el)) $genesis_file
 done
 
 sleeping 10
 
 for (( bn=1; bn<=$BN_COUNT; bn++ )); do
-    secret=$DATADIR/geth_datadir$bn/canxium/jwtsecret
-    echo $secret
-    execute_command_add_PID beacon_node_$bn.pid beacon_node_$bn.log ./beacon_node.sh $SAS -d $DEBUG_LEVEL $DATADIR/node_$bn $((BN_udp_tcp_base + $bn)) $((BN_udp_tcp_base + $bn + 100)) $((BN_http_port_base + $bn)) http://localhost:$((EL_base_auth_http + $bn)) $secret
+    el=$((bn % 3))
+    secret=$DATADIR/geth_datadir$el/canxium/jwtsecret
+    execute_command_add_PID beacon_node_$bn.pid beacon_node_$bn.log ./beacon_node.sh $SAS -d $DEBUG_LEVEL $DATADIR/node_$bn $((BN_udp_tcp_base + $bn)) $((BN_udp_tcp_base + $bn + 100)) $((BN_http_port_base + $bn)) http://localhost:$((EL_base_auth_http + $el)) $secret
 done
 
 # Start requested number of validator clients

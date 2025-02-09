@@ -18,6 +18,7 @@ GENESIS_TIME=`expr $NOW + $GENESIS_DELAY`
 
 lcli \
 	new-testnet \
+	--config-name $CONFIG_NAME \
 	--spec $SPEC_PRESET \
 	--deposit-contract-address $DEPOSIT_CONTRACT_ADDRESS \
 	--testnet-dir $TESTNET_DIR \
@@ -25,9 +26,14 @@ lcli \
 	--min-genesis-time $GENESIS_TIME \
 	--genesis-delay $GENESIS_DELAY \
 	--genesis-fork-version $GENESIS_FORK_VERSION \
+	--altair-fork-version $ALTAIR_FORK_VERSION \
+	--bellatrix-fork-version $BELLATRIX_FORK_VERSION \
+	--capella-fork-version $CAPELLA_FORK_VERSION \
+	--deneb-fork-version $DENEB_FORK_VERSION \
 	--altair-fork-epoch $ALTAIR_FORK_EPOCH \
 	--bellatrix-fork-epoch $BELLATRIX_FORK_EPOCH \
 	--capella-fork-epoch $CAPELLA_FORK_EPOCH \
+	--deneb-fork-epoch $DENEB_FORK_EPOCH \
 	--ttd $TTD \
 	--eth1-block-hash $ETH1_BLOCK_HASH \
 	--eth1-id $CHAIN_ID \
