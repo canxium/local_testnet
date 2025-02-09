@@ -78,7 +78,7 @@ EL_base_http=6000
 EL_base_auth_http=5000
 
 if [ $1 = 'geth' ]; then
-    for (( el=1; el<=$BN_COUNT; el++ )); do
+    for (( el=0; el<=1; el++ )); do
         ./kill_processes.sh "$PID_FILE/geth_$el.pid"
         rm -rf "$PID_FILE/geth_$el.pid"
         sleep 1
@@ -89,12 +89,13 @@ fi
 
 if [ $1 = 'beacon' ]; then
     for (( bn=1; bn<=$BN_COUNT; bn++ )); do
-        secret=$DATADIR/geth_datadir$bn/canxium/jwtsecret
+        el=$((bn % 2))
+        secret=$DATADIR/geth_datadir$el/canxium/jwtsecret
         
         ./kill_processes.sh "$PID_FILE/beacon_node_$bn.pid"
         rm -rf "$PID_FILE/beacon_node_$bn.pid"
         sleep 1
-        execute_command_add_PID beacon_node_$bn.pid beacon_node_$bn.log ./beacon_node.sh $SAS -d $DEBUG_LEVEL $DATADIR/node_$bn $((BN_udp_tcp_base + $bn)) $((BN_udp_tcp_base + $bn + 100)) $((BN_http_port_base + $bn)) http://localhost:$((EL_base_auth_http + $bn)) $secret
+        execute_command_add_PID beacon_node_$bn.pid beacon_node_$bn.log ./beacon_node.sh $SAS -d $DEBUG_LEVEL $DATADIR/node_$bn $((BN_udp_tcp_base + $bn)) $((BN_udp_tcp_base + $bn + 100)) $((BN_http_port_base + $bn)) http://localhost:$((EL_base_auth_http + $el)) $secret
         sleep 3
     done
 fi

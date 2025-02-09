@@ -117,14 +117,16 @@ EL_base_network=7000
 EL_base_http=6000
 EL_base_auth_http=5000
 
-for (( el=0; el<=2; el++ )); do
+(( $VC_COUNT < $BN_COUNT )) && SAS=-s || SAS=
+
+for (( el=0; el<=1; el++ )); do
     execute_command_add_PID geth_$el.pid geth_$el.log ./geth.sh $DATADIR/geth_datadir$el $((EL_base_network + $el)) $((EL_base_http + $el)) $((EL_base_auth_http + $el)) $genesis_file
 done
 
 sleeping 10
 
 for (( bn=1; bn<=$BN_COUNT; bn++ )); do
-    el=$((bn % 3))
+    el=$((bn % 2))
     secret=$DATADIR/geth_datadir$el/canxium/jwtsecret
     execute_command_add_PID beacon_node_$bn.pid beacon_node_$bn.log ./beacon_node.sh $SAS -d $DEBUG_LEVEL $DATADIR/node_$bn $((BN_udp_tcp_base + $bn)) $((BN_udp_tcp_base + $bn + 100)) $((BN_http_port_base + $bn)) http://localhost:$((EL_base_auth_http + $el)) $secret
 done
