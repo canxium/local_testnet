@@ -35,11 +35,6 @@ while getopts "v:d:ph" flag; do
   esac
 done
 
-if (( $VC_COUNT > $BN_COUNT )); then
-    echo "Error $VC_COUNT is too large, must be <= BN_COUNT=$BN_COUNT"
-    exit
-fi
-
 genesis_file="genesis.json"
 
 # Init some constants
@@ -82,8 +77,6 @@ EL_base_network=7000
 EL_base_http=6000
 EL_base_auth_http=5000
 
-(( $VC_COUNT < $BN_COUNT )) && SAS=-s || SAS=
-
 if [ $1 = 'geth' ]; then
     for (( el=1; el<=$BN_COUNT; el++ )); do
         ./kill_processes.sh "$PID_FILE/geth_$el.pid"
@@ -108,7 +101,7 @@ fi
 
 # # Start requested number of validator clients
 if [ $1 = 'vc' ]; then
-    for (( vc=1; vc<=$VC_COUNT; vc++ )); do
+    for (( vc=1; vc<=$BN_COUNT; vc++ )); do
         ./kill_processes.sh "$PID_FILE/validator_node_$vc.pid"
         rm -rf "$PID_FILE/validator_node_$vc.pid"
         sleep 1

@@ -35,11 +35,6 @@ while getopts "v:d:ph" flag; do
   esac
 done
 
-if (( $VC_COUNT > $BN_COUNT )); then
-    echo "Error $VC_COUNT is too large, must be <= BN_COUNT=$BN_COUNT"
-    exit
-fi
-
 genesis_file="genesis.json"
 
 # Init some constants
@@ -121,8 +116,6 @@ BN_http_port_base=8000
 EL_base_network=7000
 EL_base_http=6000
 EL_base_auth_http=5000
-
-(( $VC_COUNT < $BN_COUNT )) && SAS=-s || SAS=
 
 for (( el=0; el<=2; el++ )); do
     execute_command_add_PID geth_$el.pid geth_$el.log ./geth.sh $DATADIR/geth_datadir$el $((EL_base_network + $el)) $((EL_base_http + $el)) $((EL_base_auth_http + $el)) $genesis_file
