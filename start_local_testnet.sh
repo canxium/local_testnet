@@ -137,7 +137,7 @@ for (( bn=1; bn<=$BN_COUNT; bn++ )); do
 done
 
 # Start requested number of validator clients
-for (( vc=1; vc<=$VC_COUNT; vc++ )); do
+for (( vc=1; vc<=$BN_COUNT; vc++ )); do
     execute_command_add_PID validator_node_$vc.pid validator_node_$vc.log ./validator_client.sh $BUILDER_PROPOSALS -d $DEBUG_LEVEL $DATADIR/node_$vc http://localhost:$((BN_http_port_base + $vc))
 done
 

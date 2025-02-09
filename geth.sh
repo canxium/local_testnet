@@ -74,18 +74,3 @@ else
       --http.port $http_port \
       --authrpc.port $auth_port
 fi
-
-# exec $GETH_BINARY \
-#     --datadir $data_dir \
-#     --http \
-#     --http.api="engine,eth,web3,net,debug" \
-#     --networkid=$CHAIN_ID \
-#     --syncmode=full \
-#     --port $network_port \
-#     --http.port $http_port \
-#     --authrpc.port $auth_port \
-#     --mine \
-#     --miner.etherbase="0x123463a4b065722e99115d6c222f267d9cabb524" \
-#     --verbosity=3 \
-#     --bootnodes $EL_BOOTNODE_ENODE \
-#     --miner.threads=0
