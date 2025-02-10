@@ -77,6 +77,8 @@ EL_base_network=7000
 EL_base_http=6000
 EL_base_auth_http=5000
 
+(( $VC_COUNT < $BN_COUNT )) && SAS=-s || SAS=
+
 if [ $1 = 'geth' ]; then
     for (( el=0; el<=1; el++ )); do
         ./kill_processes.sh "$PID_FILE/geth_$el.pid"
